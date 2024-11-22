@@ -19,7 +19,7 @@ export const useFetch = () => {
         console.log("There are no data");
       }
     } catch (err) {
-      console.log("Error fetching movies", err.message);
+      console.log("Error fetching movies");
     }
   };
   return { fetchMovies, movies };
