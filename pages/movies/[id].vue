@@ -25,8 +25,17 @@ const getMovie = async () => {
 
     if (data) {
       movie.value = data;
-      const genreIds = movie.value.genre_ids || [];
-      if (genreIds.length) fetchSimilar(genreIds);
+      
+
+      if (movie)
+      {
+
+        
+        fetchSimilar(id);
+      
+      console.log('Similar movies fetched')
+      }
+
       console.log("Fetched Movie:", movie.value);
       console.log(genreIds);
     } else {
@@ -75,12 +84,12 @@ onMounted(() => {
       </p>
       <div class="grid md:grid-cols-5 grid-cols-3 gap-4 w-full">
         <div
-          class="rounded-[10px] bg-black/50 backdrop-blur-sm backdrop-brightness-125 shadow-lg w-52"
+          class="rounded-[10px] bg-black/50 backdrop-blur-sm backdrop-brightness-125 shadow-lg  md:w-48 w-28 sm:w-40"
           v-for="movie in movies"
           :key="movie.id"
           v-if="movie"
         >
-          <div @click="handleClick(movie.id)" class="cursor-pointer">
+          <div @click="handleClick(movie.id)" class="cursor-pointer hover:-translate-y-3 transform duration-300">
             <img
               :src="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
               alt=""
