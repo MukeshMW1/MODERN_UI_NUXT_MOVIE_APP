@@ -1,5 +1,5 @@
 <template>
-<div class="max-w-[100%] mx-auto">
+<div class="max-w-[100%] mx-auto ">
     <div class="bg-custom-bg bg-cover bg-fixed  bg-center min-h-screen ">
   >
   <nav class=" max-w-[90vw] mx-auto flex md:justify-between items-center  gap-8   text-gray-200   backdrop-blur-[2px] bg-blue-400/20 rounded-lg p-6 hover:scale-105 transform transition-all duration-300 hover:rotate-2  hover:translate-y-1 hover:skew-y-4 hover:translate-x-4 filter contrast-125 mb-20">
@@ -28,10 +28,10 @@
     type="text"
       v-model="search"
       placeholder="Search"
-      class="  md:w-full pl-10 pr-4 py-2 border rounded-[10px] border-blue-300 focus:outline-none max-w-[90px] md:max-w-[200px]  my-auto text-[12px] bg-transparent p-2" 
+      class="  md:w-full pl-10 pr-4 py-2 border rounded-[10px] border-blue-300 focus:outline-none max-w-[90px] md:max-w-[200px]  my-auto text-[12px] bg-transparent p-2" @keydown="onKeyDown" 
     />
     <!-- Icon -->
-    <div class="absolute inset-y-0 left-3 flex items-center text-gray-500">
+    <div class="absolute inset-y-0 left-3 flex items-center text-gray-500" @click="handleSearch">
       <IconsSearch class="w-[12px]" />
     </div>
   </div>
@@ -47,7 +47,7 @@
     <p class="  text-[14px] md:text-[16px] hover:text-purple-300">Email:  mukeshbhattampb@gmail.com</p>
     <p class="text-[14px] md:text-[16px] hover:text-purple-300">Phone: + 000 00 00 0000</p>
     <p class="text-[14px] md:text-[16px] hover:text-purple-300">Address: Mars</p>
-    <p class="text-[14px] md:text-[16px] hover:text-purple-300"> Owned By: <a href="https://react-portfolio-zeta-jade.vercel.app/" target="_blank" class="underline text-black font-medium">MW</a> </p>
+    <p class="text-[14px] md:text-[16px] hover:text-purple-300"> Owned By: <a href="https://react-portfolio-zeta-jade.vercel.app/" target="_blank" class="underline text-gray-400 font-medium">MW</a> </p>
   </div>
   <div class="">
     <p class="text-[14px] md:text-[16px] hover:text-purple-300">Contact</p>
@@ -64,16 +64,52 @@
 </template>
 
 <script>
+import { ref } from 'vue';
+import {debounce} from 'lodash';
+import {useRouter} from 'vue-router'
+
 export default
 {
   setup(){
      const search  =ref('')
-     return{
-      search
-     }
+     const router = useRouter()
+     
+
+     //Debounced Search Handler
+const handleSearch = debounce(()=>{
+
+  try{
+
+    if(search.value.trim()){
+      router.push({path:'/search',query:{q:search.value.trim()}})
+      search.value =""
+      console.log("The debounce is called");
+      
+      
+  }
+ 
+}
+
+catch(err)
+{
+  console.log("There was an error carryin out nthe deboune search");
+}
+},500)
+
+
+const onKeyDown = (event) =>{
+  if(event.key === 'Enter')
+{
+  handleSearch()
+}
+}
+return{
+  search,
+  onKeyDown,
+handleSearch
+}
 
   }
-
 }
 
 </script>

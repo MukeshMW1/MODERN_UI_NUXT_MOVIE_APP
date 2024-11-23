@@ -11,3 +11,19 @@
 <style>
 
 </style>
+
+
+
+
+
+<!-- funtion debounce(call,delay=2000){
+
+let timeout
+return (...args)=>{
+clearTimeout(timeout)
+timeout = setTimeOut(()=>{
+  cb(..args)
+})
+}
+
+} -->

@@ -37,7 +37,6 @@ const getMovie = async () => {
       }
 
       console.log("Fetched Movie:", movie.value);
-      console.log(genreIds);
     } else {
       console.log("Movie Couldn't be found");
     }
