@@ -65,7 +65,7 @@
 
 <script>
 import { ref } from 'vue';
-import {debounce} from 'lodash';
+import debounce from 'lodash/debounce';
 import {useRouter} from 'vue-router'
 
 export default
